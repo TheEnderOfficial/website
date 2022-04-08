@@ -1,20 +1,22 @@
-import Head from "next/head";
-import styles from "../styles/Home.module.css";
 import ContainerBlock from "../components/ContainerBlock";
-import FavouriteProjects from "../components/FavouriteProjects";
 import LatestCode from "../components/LatestCode";
 import Hero from "../components/Hero";
 import getLatestRepos from "@lib/getLatestRepos";
 import userData from "@constants/data";
 
 export default function Home({ repositories }) {
+  function _calculateAge(birthday) { // birthday is a date
+    var ageDifMs = Date.now() - birthday.getTime();
+    var ageDate = new Date(ageDifMs); // miliseconds from epoch
+    return Math.abs(ageDate.getUTCFullYear() - 1970);
+}
+
   return (
     <ContainerBlock
-      title="Manu Arora - Developer, Writer, Creator"
-      description="This is a template built specifically for my blog - Creating a developer portfolio that gets you a job."
+      title="Дмитрий Пшенников - Разработчик"
+      description={`Привет, Я Дмитрий Пшенников мне ${_calculateAge(new Date(2011, 4, 24))}`}
     >
       <Hero />
-      <FavouriteProjects />
       <LatestCode repositories={repositories} />
     </ContainerBlock>
   );
